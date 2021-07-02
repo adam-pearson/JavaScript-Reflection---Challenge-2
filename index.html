@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <script defer src="node_modules/@fortawesome/fontawesome-free/js/solid.min.js"></script>
+    <script defer src="node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>Image Assigner</title>
 </head>
 <body>
-    
+    <div id="page-container">
+        <div id="image-column">
+            <div class="header-row">
+                <h1>Image Assigner</h1>
+            </div>
+            <div class="image-div">
+                <img class="assigning-image" src="https://images.unsplash.com/photo-1625089156712-3408c990e014?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80">
+                <div class="refresh-div">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+            </div>
+        </div>
+        <div id="email-column">
+            <div id="form">
+                <formgroup>
+                    <input type="email" id="assign-email"name="email">
+                    <label id="email-label">Email</label>
+                    <span id="email-message">Please enter a valid email address.</span>
+                </formgroup>
+                <button type="button" id="assign-button" class="fancy-button pop-onhover bg-gradient1"><span>Assign</span></button>
+            </div>
+            <div id="assigned">
+                <ul class="assigned-list">
+                    <li class="assigned-main-list">
+                        <h3>adam.pearson94@gmail.com</h3>
+                        <i class="fas fa-chevron-down"></i>
+                        <li class="assigned-sub-list">
+                            <img src="">
+                            <img src="">
+                            <img src="">
+                            <img src="">
+                        </li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

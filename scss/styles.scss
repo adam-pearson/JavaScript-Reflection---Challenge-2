@@ -1,0 +1,190 @@
+@import "variables";
+@import "mixins";
+
+// Basics styles
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: $colour-2;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+}
+
+
+
+// Containers 
+
+#page-container {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+#image-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+#email-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-top: 15px;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    color: $colour-5;
+}
+
+// Image
+
+.image-div {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    &:hover .refresh-div {
+        display: block;
+    }
+    .svg-inline--fa.fa-w-16 {
+        @include centred;
+        color: #fff;
+        font-size: 2rem;
+    }
+}
+
+img {
+    border-bottom: 2px solid $colour-5;
+}
+
+// Refresh Image Overlay
+
+.refresh-div {
+    display: none;
+    @include centred;
+    background-color: rgba(0,0,0,.5);
+    width: 250px;
+    height: 250px;
+    cursor: pointer;
+}
+
+
+// Input Form
+
+#form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+formgroup {
+    position: relative;
+    margin-top: 20px;
+}
+
+.assigning-image {
+    min-width: 250px;
+    height: 250px;
+    object-fit: cover;
+    position: relative;
+}
+
+#assign-email {
+    display: block;
+    width: 250px;
+    background-color: $colour-4;
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 2px solid $colour-5;
+    padding: 12px;
+    padding-top: 20px;
+    color: $colour-3;
+    font-family: 'Roboto', sans-serif;
+    font-size: .825rem;
+    &:focus {
+        outline: 0;
+        border-radius: 5px;
+        border: 1px solid $colour-5;
+        
+    }
+    &::placeholder {
+        color: #949494;
+    }
+}
+
+#email-label {
+    font-family: 'Roboto', sans-serif;
+    font-size: .65rem;
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    color: $colour-5;
+}
+
+#email-message {
+    font-family: 'Roboto', sans-serif;
+    font-size: .65rem;
+    color: $colour-5;
+    margin-top: 5px;
+    display: none;
+    transition: .3s ease all;
+}
+
+
+// Button
+
+#assign-button {
+    margin-top: 15px;
+    padding: 15px 25px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: $colour-1;
+    outline: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background: $colour-5;
+    transition: .3s ease all;
+    transition: .15s ease background-color;
+    box-shadow: 0 0 10px $colour-4;
+    width: 75%;
+    &:hover {
+        transform: scale(0.95);
+        box-shadow: 0 0 3px $colour-4;
+    }
+    &:active {
+        background-color: $colour-6;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

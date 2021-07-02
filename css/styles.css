@@ -1,0 +1,172 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #2E2E2E;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+}
+
+#page-container {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+#image-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+#email-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding-top: 15px;
+}
+
+h1 {
+  font-family: 'Roboto', sans-serif;
+  color: #C092FC;
+}
+
+.image-div {
+  position: relative;
+  width: 250px;
+  height: 250px;
+}
+
+.image-div:hover .refresh-div {
+  display: block;
+}
+
+.image-div .svg-inline--fa.fa-w-16 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 2rem;
+}
+
+img {
+  border-bottom: 2px solid #C092FC;
+}
+
+.refresh-div {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 250px;
+  height: 250px;
+  cursor: pointer;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+formgroup {
+  position: relative;
+  margin-top: 20px;
+}
+
+.assigning-image {
+  min-width: 250px;
+  height: 250px;
+  object-fit: cover;
+  position: relative;
+}
+
+#assign-email {
+  display: block;
+  width: 250px;
+  background-color: #212121;
+  border: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 2px solid #C092FC;
+  padding: 12px;
+  padding-top: 20px;
+  color: #ABABAB;
+  font-family: 'Roboto', sans-serif;
+  font-size: .825rem;
+}
+
+#assign-email:focus {
+  outline: 0;
+  border-radius: 5px;
+  border: 1px solid #C092FC;
+}
+
+#assign-email::placeholder {
+  color: #949494;
+}
+
+#email-label {
+  font-family: 'Roboto', sans-serif;
+  font-size: .65rem;
+  position: absolute;
+  top: 5px;
+  left: 12px;
+  color: #C092FC;
+}
+
+#email-message {
+  font-family: 'Roboto', sans-serif;
+  font-size: .65rem;
+  color: #C092FC;
+  margin-top: 5px;
+  display: none;
+  transition: .3s ease all;
+}
+
+#assign-button {
+  margin-top: 15px;
+  padding: 15px 25px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #121212;
+  outline: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #C092FC;
+  transition: .3s ease all;
+  transition: .15s ease background-color;
+  box-shadow: 0 0 10px #212121;
+  width: 75%;
+}
+
+#assign-button:hover {
+  transform: scale(0.95);
+  box-shadow: 0 0 3px #212121;
+}
+
+#assign-button:active {
+  background-color: #1FDECB;
+}
+/*# sourceMappingURL=styles.css.map */

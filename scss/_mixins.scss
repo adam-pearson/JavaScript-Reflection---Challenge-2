@@ -1,0 +1,58 @@
+@mixin push--auto {
+    margin: { 
+        left: auto;
+        right: auto;
+    }
+  }
+
+  @mixin media-xs {
+    @media (max-width: #{$xs-width}) {
+        @content;
+    }
+  }
+  
+  @mixin media-sm {
+    @media (min-width: #{$sm-width}) {
+        @content;
+    }
+  }
+  
+  @mixin media-md {
+    @media (min-width: #{$md-width}) {
+        @content;
+    }
+  }
+  
+  @mixin media-lg {
+    @media (min-width: #{$lg-width}) {
+        @content;
+    }
+  }
+  
+  @mixin media-xl {
+    @media (min-width: #{$xl-width}) {
+        @content;
+    }
+  }
+  
+  
+  @mixin media-xxl {
+  @media (min-width: #{$xxl-width}) {
+      @content;
+  }
+  }
+
+  @mixin media-ie{
+    @media screen and (-ms-high-contrast: none) {
+        @content;
+    }
+  }
+
+//centre an element 
+
+@mixin centred {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
