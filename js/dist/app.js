@@ -91,6 +91,7 @@ emailButton.addEventListener('click', function () {
       - When a tab is clicked, show the images
       - Add email validation
       - Document code a little better
+      - Refactor the assignButtons function
   */
 
   (function assignButtons() {
