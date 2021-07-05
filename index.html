@@ -19,11 +19,17 @@
     <div id="page-container">
         <div id="image-column">
             <div class="image-div">
-                <div class="loader"></div>
+                <div class="loader-container">
+                    <div id="loader-inner" class="loader-inner">
+                        <div class="loader"></div>
+                        <p>Loading Image</p>
+                    </div>
+                </div>
                 <img id="pulled-image" class="assigning-image">
                 <div id="refresh" class="refresh-div">
                     <i class="fas fa-sync-alt"></i>
                 </div>
+
             </div>
             <p>Click to load a new image</p>
         </div>
@@ -34,11 +40,9 @@
                     <label id="email-label">Email</label>
                     <span id="email-message">Please enter a valid email address.</span>
                 </formgroup>
-                <button type="button" id="assign-button" class="fancy-button pop-onhover bg-gradient1"><span>Assign</span></button>
+                <button type="button" id="assign-button"><span>Assign</span></button>
             </div>
             <div id="assigned">
-                <ul id="assigned-list" class="assigned-list">
-                </ul>
             </div>
         </div>
     </div>
