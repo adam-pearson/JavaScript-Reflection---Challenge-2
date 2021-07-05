@@ -15,7 +15,5 @@
     "gulp-babel": "^8.0.0",
     "glob-parent": ">=6.0.0"
   },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.3"
-  }
+  "dependencies": {}
 }
