@@ -77,7 +77,7 @@ emailButton.addEventListener('click', function () {
 
   if (storage.length !== 0) {
     for (var i = 0; i < storage.length; i++) {
-      emails += "\n            <li class=\"assigned-main-list\">\n                <h3>".concat(storage[i].email, "<h3>\n                <i class=\"fas fa-chevron-down\"></i>\n                <li class=\"assigned-sub-list\">\n                </li>\n            </li>\n            ");
+      emails += "\n            <li class=\"assigned-main-list\">\n                <h3>".concat(storage[i].email, "</h3>\n                <i class=\"fas fa-chevron-down\"></i>\n                <li class=\"assigned-sub-list\">\n                </li>\n            </li>\n            ");
     }
 
     console.log(emails + "</ul>");
@@ -90,6 +90,7 @@ emailButton.addEventListener('click', function () {
       - Create the loop to loop through the images and append
       - When a tab is clicked, show the images
       - Add email validation
+      - Document code a little better
   */
 
   (function assignButtons() {

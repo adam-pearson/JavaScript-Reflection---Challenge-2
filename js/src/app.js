@@ -83,7 +83,7 @@ emailButton.addEventListener('click', function() {
         for (let i = 0; i < storage.length; i++) {
             emails += `
             <li class="assigned-main-list">
-                <h3>${storage[i].email}<h3>
+                <h3>${storage[i].email}</h3>
                 <i class="fas fa-chevron-down"></i>
                 <li class="assigned-sub-list">
                 </li>
@@ -100,6 +100,7 @@ emailButton.addEventListener('click', function() {
         - Create the loop to loop through the images and append
         - When a tab is clicked, show the images
         - Add email validation
+        - Document code a little better
     */
     (function assignButtons() {
         let buttons = document.getElementsByClassName('assigned-main-list');
