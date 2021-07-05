@@ -1,11 +1,11 @@
 const randomImage = `https://picsum.photos/${randomNumber(500, 1200)}/${randomNumber(1200, 1500)}`;
-
 const pulledImage = document.getElementById('pulled-image');
 const refresh = document.getElementById('refresh');
 const emailInput = document.getElementById('assign-email');
 const emailButton = document.getElementById('assign-button');
 const emailMessage = document.getElementById('email-message');
 const assignedList = document.getElementById('assigned-list');
+let storage = [];
 
 /* 
     Gets a random number to use as the
@@ -52,16 +52,25 @@ refresh.addEventListener('click', function() {
 });
   
 
+/*
+    Event listener for the assign email button.
+    On click it will loop through the storage
+    array, see if the email in the email field
+    exists in the array:
+    - If it doesn't, push a new object onto the array
+    - If it does, push the current image url onto the
+    relevant object array value
+*/
+
+emailButton.addEventListener('click', function() {
+    for (let i = 0; i < storage.length; i++) {
+
+    }
+});
+
 
 //placeholder - template for my email storage
-let storage = {}
-for (let i = 0; i < storage.length; i++) {
-    /*
-        search for & return any email match objects
-        append url to this if found, if not then add
-        a new key/value pair 
-    */
-}
+
 storage.email0 = {email: [url1, url2, url3]}
 
 storage = [
