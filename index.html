@@ -13,17 +13,19 @@
     <title>Image Assigner</title>
 </head>
 <body>
+    <div class="header-row">
+        <h1>Image Assigner</h1>
+    </div>
     <div id="page-container">
         <div id="image-column">
-            <div class="header-row">
-                <h1>Image Assigner</h1>
-            </div>
             <div class="image-div">
-                <img class="assigning-image" src="https://images.unsplash.com/photo-1625089156712-3408c990e014?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80">
-                <div class="refresh-div">
+                <div class="loader"></div>
+                <img id="pulled-image" class="assigning-image">
+                <div id="refresh" class="refresh-div">
                     <i class="fas fa-sync-alt"></i>
                 </div>
             </div>
+            <p>Click to load a new image</p>
         </div>
         <div id="email-column">
             <div id="form">
@@ -35,20 +37,13 @@
                 <button type="button" id="assign-button" class="fancy-button pop-onhover bg-gradient1"><span>Assign</span></button>
             </div>
             <div id="assigned">
-                <ul class="assigned-list">
-                    <li class="assigned-main-list">
-                        <h3>adam.pearson94@gmail.com</h3>
-                        <i class="fas fa-chevron-down"></i>
-                        <li class="assigned-sub-list">
-                            <img src="">
-                            <img src="">
-                            <img src="">
-                            <img src="">
-                        </li>
-                    </li>
+                <ul id="assigned-list" class="assigned-list">
                 </ul>
             </div>
         </div>
     </div>
+    <script src="js/dist/jquery-3.6.0.min.js"></script>
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script src="js/dist/app.js"></script>
 </body>
 </html>
