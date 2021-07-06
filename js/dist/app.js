@@ -29,6 +29,7 @@ function randomNumber(min, max) {
 var returnedData = axios.get(randomImage).then(function (response) {
   // handle success
   pulledImage.setAttribute('src', response.request.responseURL);
+  console.log(response.request.responseURL);
 })["catch"](function (error) {
   // handle error
   console.log(error);
