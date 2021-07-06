@@ -27,8 +27,9 @@ function randomNumber(min, max) {
 const returnedData = axios.get(randomImage)
     .then(function (response) {
     // handle success
-    const configImage = response.request.responseURL || response.config.url;
+    const configImage = response.request.responseURL;
     pulledImage.setAttribute('src', configImage);
+    pulledImage.setAttribute("data-object-fit", "cover");
     console.log(response);
     })
     .catch(function (error) {
@@ -43,8 +44,9 @@ const returnedData = axios.get(randomImage)
 refresh.addEventListener('click', function() {
     axios.get(`${randomImage}`)
     .then(function (response) {
-        const configImage = response.request.responseURL || response.config.url;
+        const configImage = response.request.responseURL;
         pulledImage.setAttribute('src', configImage);
+        pulledImage.setAttribute("data-object-fit", "cover");
     })
     .catch(function (error) {
         // handle error
@@ -85,14 +87,14 @@ emailButton.addEventListener('click', function() {
         if (storage.length === 0) {
             storage.push({
                 "email" : grabbedEmail,
-                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="contain">`]
+                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="cover">`]
             });
-        } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`)) {
-            storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="contain">`);
+        } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="cover">`)) {
+            storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="cover">`);
         } else if (indexOfEmail === -1) {
             storage.push({
                 "email" : grabbedEmail,
-                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="contain">`]
+                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="cover">`]
                 
             });
         }
@@ -132,8 +134,9 @@ emailButton.addEventListener('click', function() {
 
         axios.get(`${randomImage}`)
         .then(function (response) {
-            const configImage = response.request.responseURL || response.config.url;
+            const configImage = response.request.responseURL;
             pulledImage.setAttribute('src', configImage);
+            pulledImage.setAttribute("data-object-fit", "cover");
         })
         .catch(function (error) {
             // handle error
