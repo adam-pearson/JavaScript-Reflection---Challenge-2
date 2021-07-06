@@ -1,6 +1,6 @@
 "use strict";
 
-var randomImage = "https://picsum.photos/".concat(randomNumber(500, 1200), "/").concat(randomNumber(1200, 1500));
+var randomImage = "https://picsum.photos/500/1200";
 var pulledImage = document.getElementById('pulled-image');
 var refresh = document.getElementById('refresh');
 var emailInput = document.getElementById('assign-email');
@@ -28,8 +28,9 @@ function randomNumber(min, max) {
 
 var returnedData = axios.get(randomImage).then(function (response) {
   // handle success
-  pulledImage.setAttribute('src', response.request.responseURL);
-  console.log(response.request.responseURL);
+  var configImage = response.request.responseURL || response.config.url;
+  pulledImage.setAttribute('src', configImage);
+  console.log(response);
 })["catch"](function (error) {
   // handle error
   console.log(error);
@@ -41,7 +42,8 @@ var returnedData = axios.get(randomImage).then(function (response) {
 
 refresh.addEventListener('click', function () {
   axios.get("".concat(randomImage)).then(function (response) {
-    pulledImage.setAttribute('src', response.request.responseURL);
+    var configImage = response.request.responseURL || response.config.url;
+    pulledImage.setAttribute('src', configImage);
   })["catch"](function (error) {
     // handle error
     console.log(error);
@@ -113,7 +115,8 @@ emailButton.addEventListener('click', function () {
     })();
 
     axios.get("".concat(randomImage)).then(function (response) {
-      pulledImage.setAttribute('src', response.request.responseURL);
+      var configImage = response.request.responseURL || response.config.url;
+      pulledImage.setAttribute('src', configImage);
     })["catch"](function (error) {
       // handle error
       console.log(error);
