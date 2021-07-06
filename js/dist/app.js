@@ -79,20 +79,20 @@ emailButton.addEventListener('click', function () {
     if (storage.length === 0) {
       storage.push({
         "email": grabbedEmail,
-        "urls": ["<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\">")]
+        "urls": ["<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\" data-object-fit=\"contain\">")]
       });
     } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes("<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\">"))) {
-      storage[indexOfEmail].urls.push("<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\">"));
+      storage[indexOfEmail].urls.push("<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\" data-object-fit=\"contain\">"));
     } else if (indexOfEmail === -1) {
       storage.push({
         "email": grabbedEmail,
-        "urls": ["<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\">")]
+        "urls": ["<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\" data-object-fit=\"contain\">")]
       });
     }
 
     if (storage.length !== 0) {
       for (var i = 0; i < storage.length; i++) {
-        emails += "\n    <ul class=\"assigned-list\">\n        <li class=\"assigned-main-list\">\n            <ul class=\"email-heading\">\n                <h3>".concat(storage[i].email, "</h3>\n                <i class=\"fas fa-chevron-down\"></i>\n                <i class=\"fas fa-chevron-up\"></i>\n            </ul>\n            <ul>\n                <li class=\"assigned-sub-list\">\n                    ").concat(storage[i].urls.join(""), "\n                </li>\n            </ul>\n        </li>\n    </ul>\n                ");
+        emails += "<ul class=\"assigned-list\">\n        <li class=\"assigned-main-list\">\n            <ul class=\"email-heading\">\n                <h3>".concat(storage[i].email, "</h3>\n                <i class=\"fas fa-chevron-down\"></i>\n                <i class=\"fas fa-chevron-up\"></i>\n            </ul>\n            <ul>\n                <li class=\"assigned-sub-list\">\n                    ").concat(storage[i].urls.join(""), " \n                </li>\n            </ul>\n        </li>\n    </ul>");
       }
     }
 

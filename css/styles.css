@@ -163,6 +163,7 @@ h1 {
   position: relative;
   width: 100%;
   border-bottom: 2px solid #C092FC;
+  font-family: 'object-fit: cover;';
 }
 
 @media (min-width: 768px) {
@@ -442,5 +443,6 @@ formgroup {
   height: 130px;
   object-fit: cover;
   padding: 15px;
+  font-family: 'object-fit: cover;';
 }
 /*# sourceMappingURL=styles.css.map */

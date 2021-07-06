@@ -82,22 +82,21 @@ emailButton.addEventListener('click', function() {
         if (storage.length === 0) {
             storage.push({
                 "email" : grabbedEmail,
-                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
+                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="contain">`]
             });
         } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`)) {
-            storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`);
+            storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="contain">`);
         } else if (indexOfEmail === -1) {
             storage.push({
                 "email" : grabbedEmail,
-                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
+                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="contain">`]
                 
             });
         }
 
         if (storage.length !== 0) {
             for (let i = 0; i < storage.length; i++) {
-                emails += `
-    <ul class="assigned-list">
+                emails += `<ul class="assigned-list">
         <li class="assigned-main-list">
             <ul class="email-heading">
                 <h3>${storage[i].email}</h3>
@@ -106,12 +105,11 @@ emailButton.addEventListener('click', function() {
             </ul>
             <ul>
                 <li class="assigned-sub-list">
-                    ${storage[i].urls.join("")}
+                    ${storage[i].urls.join("")} 
                 </li>
             </ul>
         </li>
-    </ul>
-                `;
+    </ul>`;
             }
         }
         
@@ -141,3 +139,4 @@ emailButton.addEventListener('click', function() {
         });
     }
 });
+

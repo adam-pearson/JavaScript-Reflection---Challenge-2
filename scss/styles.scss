@@ -140,6 +140,7 @@ h1 {
     position: relative;
     width: 100%;
     border-bottom: 2px solid $colour-5;
+    font-family: 'object-fit: cover;';
     @include media-md {
         height: 80vh;
     }
@@ -317,7 +318,6 @@ formgroup {
 
 // Email list
 
-
 #assigned {
     width: 100%;
 }
@@ -406,6 +406,7 @@ formgroup {
     height: 130px;
     object-fit: cover;
     padding: 15px;
+    font-family: 'object-fit: cover;';
 }
 
 
