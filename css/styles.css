@@ -20,6 +20,21 @@ button {
   text-transform: uppercase;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ABABAB;
+  -webkit-box-shadow: 0 0 0px 1000px #2E2E2E inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .header-row {
   text-align: center;
   padding-left: 15px;
@@ -268,6 +283,10 @@ formgroup {
   color: #949494;
 }
 
+#assign-email.error {
+  border: 1px solid #ff2a3d;
+}
+
 #email-label {
   font-family: 'Roboto', sans-serif;
   font-size: .65rem;
@@ -277,13 +296,21 @@ formgroup {
   color: #C092FC;
 }
 
+#email-label.error {
+  color: #ff2a3d;
+}
+
 #email-message {
   font-family: 'Roboto', sans-serif;
-  font-size: .65rem;
-  color: #C092FC;
+  font-size: .7rem;
+  color: #ff2a3d;
   margin-top: 5px;
   display: none;
   transition: .3s ease all;
+}
+
+#email-message.shown {
+  display: block;
 }
 
 #assign-button {
@@ -365,6 +392,22 @@ formgroup {
 .email-heading:hover {
   background-color: #251F2D;
   border: 1px solid rgba(192, 146, 252, 0.25);
+}
+
+.fa-chevron-down {
+  display: block;
+}
+
+.fa-chevron-down.toggled {
+  display: none;
+}
+
+.fa-chevron-up {
+  display: none;
+}
+
+.fa-chevron-up.toggled {
+  display: block;
 }
 
 .email-heading.active {

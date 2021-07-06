@@ -2,6 +2,7 @@ const randomImage = `https://picsum.photos/${randomNumber(500, 1200)}/${randomNu
 const pulledImage = document.getElementById('pulled-image');
 const refresh = document.getElementById('refresh');
 const emailInput = document.getElementById('assign-email');
+const emailLabel = document.getElementById('email-label');
 const emailButton = document.getElementById('assign-button');
 const emailMessage = document.getElementById('email-message');
 const assignedList = document.getElementById('assigned-list');
@@ -23,7 +24,7 @@ function randomNumber(min, max) {
     Axios GET request to pull a random image
     from Picsum
 */
-const returnedData = axios.get(`${randomImage}`)
+const returnedData = axios.get(randomImage)
     .then(function (response) {
     // handle success
     pulledImage.setAttribute('src', response.request.responseURL);
@@ -49,7 +50,6 @@ refresh.addEventListener('click', function() {
     .finally(function() {
     });
 });
-  
 
 /*
     Event listener for the assign email button.
@@ -65,66 +65,79 @@ emailButton.addEventListener('click', function() {
     const indexOfEmail = storage.findIndex(i => i.email === grabbedEmail);
     let emails = "";
 
-    
-    if (storage.length === 0) {
-        storage.push({
-            "email" : grabbedEmail,
-            "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
-        });
-    } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`)) {
-        storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`);
-    } else if (indexOfEmail === -1) {
-        storage.push({
-            "email" : grabbedEmail,
-            "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
-            
-        });
+    function validateEmail(email) {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     }
-    console.log(storage);
 
-    if (storage.length !== 0) {
-        for (let i = 0; i < storage.length; i++) {
-            emails += `
-<ul class="assigned-list">
-    <li class="assigned-main-list">
-        <ul class="email-heading">
-            <h3>${storage[i].email}</h3>
-            <i class="fas fa-chevron-down"></i>
-        </ul>
-        <ul>
-            <li class="assigned-sub-list">
-                ${storage[i].urls.join("")}
-            </li>
-        </ul>
-    </li>
-</ul>
-            `;
-        }
-    }
-    
-    console.log(emails);
-    $('#assigned').html(emails);
-    /*
-        To do: 
-        - Remove active class when another tab is pressed
-        * Create the loop to loop through the images and append
-        * When a tab is clicked, show the images
-        - Add email validation
-        - Document code a little better
-        - Refactor the assignButtons function
-        - Fix the randomizer
-        - Change the arrow on the buttons
-    */
-    (function assignButtons() {
-        let buttons = document.getElementsByClassName('email-heading');
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].addEventListener('click', function(e) {
-                buttons.forEach(element) 
+    if (!validateEmail(grabbedEmail)) {
+        emailMessage.classList.add('shown');
+        emailInput.classList.add('error');
+        emailLabel.classList.add('error');
+    } else if (validateEmail(grabbedEmail)) {
+        emailMessage.classList.remove('shown');
+        emailInput.classList.remove('error');
+        emailLabel.classList.remove('error');
 
-                }
-                buttons[i].classList.toggle("active");
-                buttons[i].nextElementSibling.children[0].classList.toggle("active");
+        if (storage.length === 0) {
+            storage.push({
+                "email" : grabbedEmail,
+                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
+            });
+        } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`)) {
+            storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`);
+        } else if (indexOfEmail === -1) {
+            storage.push({
+                "email" : grabbedEmail,
+                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
+                
             });
         }
-    })();
+
+        if (storage.length !== 0) {
+            for (let i = 0; i < storage.length; i++) {
+                emails += `
+    <ul class="assigned-list">
+        <li class="assigned-main-list">
+            <ul class="email-heading">
+                <h3>${storage[i].email}</h3>
+                <i class="fas fa-chevron-down"></i>
+                <i class="fas fa-chevron-up"></i>
+            </ul>
+            <ul>
+                <li class="assigned-sub-list">
+                    ${storage[i].urls.join("")}
+                </li>
+            </ul>
+        </li>
+    </ul>
+                `;
+            }
+        }
+        
+        $('#assigned').html(emails);
+
+        (function assignButtons() {
+            let buttons = document.getElementsByClassName('email-heading');
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].addEventListener('click', function(e) {
+                    this.classList.toggle("active");
+                    this.nextElementSibling.children[0].classList.toggle("active");
+                    this.querySelector('.fa-chevron-down').classList.toggle('toggled');
+                    this.querySelector('.fa-chevron-up').classList.toggle('toggled');
+                });
+            }
+        })();
+
+        axios.get(`${randomImage}`)
+        .then(function (response) {
+            pulledImage.setAttribute('src', response.request.responseURL);
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        })
+        .finally(function() {
+        });
+    }
 });

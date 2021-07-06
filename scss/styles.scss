@@ -25,6 +25,22 @@ button {
     text-transform: uppercase;
 }
 
+// Change Autocomplete styles in Chrome
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: $colour-3;
+  -webkit-box-shadow: 0 0 0px 1000px $colour-2 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 // Header
 
 .header-row {
@@ -237,6 +253,9 @@ formgroup {
     &::placeholder {
         color: #949494;
     }
+    &.error {
+        border: 1px solid  $colour-error;
+    }
 }
 
 #email-label {
@@ -246,15 +265,22 @@ formgroup {
     top: 5px;
     left: 12px;
     color: $colour-5;
+    &.error {
+        color: $colour-error;
+    }
 }
 
 #email-message {
     font-family: 'Roboto', sans-serif;
-    font-size: .65rem;
-    color: $colour-5;
+    font-size: .7rem;
+    color:  $colour-error;
     margin-top: 5px;
     display: none;
     transition: .3s ease all;
+}
+
+#email-message.shown {
+    display: block;
 }
 
 
@@ -333,6 +359,20 @@ formgroup {
     &:hover {
         background-color: $colour-6;
         border: 1px solid fade-out($colour-5, .75);
+    }
+}
+
+.fa-chevron-down {
+    display: block;
+    &.toggled {
+        display: none;
+    }
+}
+
+.fa-chevron-up {
+    display: none;
+    &.toggled {
+        display: block;
     }
 }
 
