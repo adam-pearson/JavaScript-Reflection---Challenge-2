@@ -63,51 +63,67 @@ refresh.addEventListener('click', function() {
 emailButton.addEventListener('click', function() {
     const grabbedEmail = emailInput.value;
     const indexOfEmail = storage.findIndex(i => i.email === grabbedEmail);
-    let emails = `<ul id="assigned-list" class="assigned-list">`;
+    let emails = "";
+
     
     if (storage.length === 0) {
         storage.push({
             "email" : grabbedEmail,
-            "urls" : [pulledImage.getAttribute('src')]
+            "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
         });
-    } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(pulledImage.getAttribute('src'))) {
-        storage[indexOfEmail].urls.push(pulledImage.getAttribute('src'));
+    } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`)) {
+        storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`);
     } else if (indexOfEmail === -1) {
         storage.push({
             "email" : grabbedEmail,
-            "urls" : [pulledImage.getAttribute('src')]
+            "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
+            
         });
     }
+    console.log(storage);
 
     if (storage.length !== 0) {
         for (let i = 0; i < storage.length; i++) {
             emails += `
-            <li class="assigned-main-list">
-                <h3>${storage[i].email}</h3>
-                <i class="fas fa-chevron-down"></i>
-                <li class="assigned-sub-list">
-                </li>
+<ul class="assigned-list">
+    <li class="assigned-main-list">
+        <ul class="email-heading">
+            <h3>${storage[i].email}</h3>
+            <i class="fas fa-chevron-down"></i>
+        </ul>
+        <ul>
+            <li class="assigned-sub-list">
+                ${storage[i].urls.join("")}
             </li>
+        </ul>
+    </li>
+</ul>
             `;
         }
-        console.log(emails + "</ul>");
     }
-    assigned.innerHTML = emails + "</ul>";
-
+    
+    console.log(emails);
+    $('#assigned').html(emails);
     /*
         To do: 
         - Remove active class when another tab is pressed
-        - Create the loop to loop through the images and append
-        - When a tab is clicked, show the images
+        * Create the loop to loop through the images and append
+        * When a tab is clicked, show the images
         - Add email validation
         - Document code a little better
         - Refactor the assignButtons function
+        - Fix the randomizer
+        - Change the arrow on the buttons
     */
     (function assignButtons() {
-        let buttons = document.getElementsByClassName('assigned-main-list');
+        let buttons = document.getElementsByClassName('email-heading');
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].addEventListener('click', function(e) {
+                buttons.forEach(element) 
+
+                }
                 buttons[i].classList.toggle("active");
+                buttons[i].nextElementSibling.children[0].classList.toggle("active");
             });
         }
     })();
