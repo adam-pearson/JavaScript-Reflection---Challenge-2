@@ -1,6 +1,6 @@
 "use strict";
 
-var randomImage = "https://picsum.photos/500/1200";
+var randomImage = "https://picsum.photos/500";
 var pulledImage = document.getElementById('pulled-image');
 var refresh = document.getElementById('refresh');
 var emailInput = document.getElementById('assign-email');
@@ -9,47 +9,46 @@ var emailButton = document.getElementById('assign-button');
 var emailMessage = document.getElementById('email-message');
 var assignedList = document.getElementById('assigned-list');
 var assignedCont = document.getElementById('assigned');
+var topLoader = document.getElementById('top-loader-container');
 var storage = [];
-/* 
-    Gets a random number to use as the
-    width & height for the Picsum API
-*/
-
-function randomNumber(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 /*
     Axios GET request to pull a random image
     from Picsum
 */
 
-
 var returnedData = axios.get(randomImage).then(function (response) {
   // handle success
-  var configImage = response.request.responseURL;
-  pulledImage.setAttribute('src', configImage);
-  pulledImage.setAttribute("data-object-fit", "cover");
+  var picsumID = response.headers['picsum-id'];
+  var currentURL = "https://picsum.photos/id/".concat(picsumID, "/500");
+  pulledImage.setAttribute("src", currentURL);
+  topLoader.classList.add('loading');
   console.log(response);
 })["catch"](function (error) {
   // handle error
   console.log(error);
+})["finally"](function (response) {
+  topLoader.classList.remove('loading');
 });
 /*
-    Loads a new image image when the refresh
-    overlay is clicked
+    Shows the loading animation, and then
+    loads a new image image when the refresh
+    overlay is clicked. Removes the loading
+    animation once everything has finished
 */
 
 refresh.addEventListener('click', function () {
+  topLoader.classList.add('loading');
   axios.get("".concat(randomImage)).then(function (response) {
-    var configImage = response.request.responseURL;
-    pulledImage.setAttribute('src', configImage);
-    pulledImage.setAttribute("data-object-fit", "cover");
+    var picsumID = response.headers['picsum-id'];
+    var currentURL = "https://picsum.photos/id/".concat(picsumID, "/500");
+    pulledImage.setAttribute("src", currentURL);
+    console.log(response);
   })["catch"](function (error) {
     // handle error
     console.log(error);
-  })["finally"](function () {});
+  })["finally"](function (response) {
+    topLoader.classList.remove('loading');
+  });
 });
 /*
     Event listener for the assign email button.
@@ -84,14 +83,14 @@ emailButton.addEventListener('click', function () {
     if (storage.length === 0) {
       storage.push({
         "email": grabbedEmail,
-        "urls": ["<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\" data-object-fit=\"cover\">")]
+        "urls": ["<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\">")]
       });
-    } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes("<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\" data-object-fit=\"cover\">"))) {
-      storage[indexOfEmail].urls.push("<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\" data-object-fit=\"cover\">"));
+    } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes("<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\">"))) {
+      storage[indexOfEmail].urls.push("<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\">"));
     } else if (indexOfEmail === -1) {
       storage.push({
         "email": grabbedEmail,
-        "urls": ["<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\" data-object-fit=\"cover\">")]
+        "urls": ["<img class=\"assigned-sub-image\" src=\"".concat(pulledImage.getAttribute('src'), "\">")]
       });
     }
 
@@ -116,13 +115,17 @@ emailButton.addEventListener('click', function () {
       }
     })();
 
+    topLoader.classList.add('loading');
     axios.get("".concat(randomImage)).then(function (response) {
-      var configImage = response.request.responseURL;
-      pulledImage.setAttribute('src', configImage);
-      pulledImage.setAttribute("data-object-fit", "cover");
+      var picsumID = response.headers['picsum-id'];
+      var currentURL = "https://picsum.photos/id/".concat(picsumID, "/500");
+      pulledImage.setAttribute("src", currentURL);
+      console.log(response);
     })["catch"](function (error) {
       // handle error
       console.log(error);
-    })["finally"](function () {});
+    })["finally"](function () {
+      topLoader.classList.remove('loading');
+    });
   }
 });

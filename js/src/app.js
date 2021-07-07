@@ -1,4 +1,4 @@
-const randomImage = `https://picsum.photos/500/1200`;
+let randomImage = `https://picsum.photos/500`;
 const pulledImage = document.getElementById('pulled-image');
 const refresh = document.getElementById('refresh');
 const emailInput = document.getElementById('assign-email');
@@ -7,17 +7,8 @@ const emailButton = document.getElementById('assign-button');
 const emailMessage = document.getElementById('email-message');
 const assignedList = document.getElementById('assigned-list');
 const assignedCont = document.getElementById('assigned');
+const topLoader = document.getElementById('top-loader-container');
 let storage = [];
-
-/* 
-    Gets a random number to use as the
-    width & height for the Picsum API
-*/
-function randomNumber(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 
 /*
@@ -27,33 +18,42 @@ function randomNumber(min, max) {
 const returnedData = axios.get(randomImage)
     .then(function (response) {
     // handle success
-    const configImage = response.request.responseURL;
-    pulledImage.setAttribute('src', configImage);
-    pulledImage.setAttribute("data-object-fit", "cover");
+    const picsumID =  response.headers['picsum-id'];
+    let currentURL =  `https://picsum.photos/id/${picsumID}/500`;
+    pulledImage.setAttribute(`src`, currentURL);
+    topLoader.classList.add('loading');
     console.log(response);
     })
     .catch(function (error) {
     // handle error
     console.log(error);
+    })
+    .finally(function(response) {
+        topLoader.classList.remove('loading');
     });
 
 /*
-    Loads a new image image when the refresh
-    overlay is clicked
+    Shows the loading animation, and then
+    loads a new image image when the refresh
+    overlay is clicked. Removes the loading
+    animation once everything has finished
 */
 refresh.addEventListener('click', function() {
+    topLoader.classList.add('loading');
     axios.get(`${randomImage}`)
     .then(function (response) {
-        const configImage = response.request.responseURL;
-        pulledImage.setAttribute('src', configImage);
-        pulledImage.setAttribute("data-object-fit", "cover");
-    })
-    .catch(function (error) {
+        const picsumID =  response.headers['picsum-id'];
+        const currentURL =  `https://picsum.photos/id/${picsumID}/500`;
+        pulledImage.setAttribute(`src`, currentURL);
+        console.log(response);
+        })
+        .catch(function (error) {
         // handle error
         console.log(error);
-    })
-    .finally(function() {
-    });
+        })
+        .finally(function(response) {
+            topLoader.classList.remove('loading');
+        });
 });
 
 /*
@@ -87,14 +87,14 @@ emailButton.addEventListener('click', function() {
         if (storage.length === 0) {
             storage.push({
                 "email" : grabbedEmail,
-                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="cover">`]
+                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
             });
-        } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="cover">`)) {
-            storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="cover">`);
+        } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`)) {
+            storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`);
         } else if (indexOfEmail === -1) {
             storage.push({
                 "email" : grabbedEmail,
-                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}" data-object-fit="cover">`]
+                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
                 
             });
         }
@@ -132,17 +132,20 @@ emailButton.addEventListener('click', function() {
             }
         })();
 
+        topLoader.classList.add('loading');
         axios.get(`${randomImage}`)
         .then(function (response) {
-            const configImage = response.request.responseURL;
-            pulledImage.setAttribute('src', configImage);
-            pulledImage.setAttribute("data-object-fit", "cover");
+            const picsumID =  response.headers['picsum-id'];
+            const currentURL =  `https://picsum.photos/id/${picsumID}/500`;
+            pulledImage.setAttribute(`src`, currentURL);
+            console.log(response);
         })
         .catch(function (error) {
             // handle error
             console.log(error);
         })
         .finally(function() {
+            topLoader.classList.remove('loading');
         });
     }
 });
