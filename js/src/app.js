@@ -87,14 +87,14 @@ emailButton.addEventListener('click', function() {
         if (storage.length === 0) {
             storage.push({
                 "email" : grabbedEmail,
-                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
+                "urls" : [`<a href="${pulledImage.getAttribute('src')}" target="_blank"><img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}"></a>`]
             });
-        } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`)) {
-            storage[indexOfEmail].urls.push(`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`);
+        } else if (indexOfEmail !== -1 && !storage[indexOfEmail].urls.includes(`<a href="${pulledImage.getAttribute('src')}" target="_blank"><img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}"></a>`)) {
+            storage[indexOfEmail].urls.push(`<a href="${pulledImage.getAttribute('src')}" target="_blank"><img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}"></a>`);
         } else if (indexOfEmail === -1) {
             storage.push({
                 "email" : grabbedEmail,
-                "urls" : [`<img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}">`]
+                "urls" : [`<a href="${pulledImage.getAttribute('src')}" target="_blank"><img class="assigned-sub-image" src="${pulledImage.getAttribute('src')}"></a>`]
                 
             });
         }
@@ -110,7 +110,7 @@ emailButton.addEventListener('click', function() {
             </ul>
             <ul>
                 <li class="assigned-sub-list">
-                    ${storage[i].urls.join("")} 
+                    ${storage[i].urls.join("")}
                 </li>
             </ul>
         </li>

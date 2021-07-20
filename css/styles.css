@@ -488,20 +488,94 @@ formgroup {
 
 .assigned-sub-list {
   display: none;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   width: 100%;
   background-color: #2E2E2E;
+  padding-top: 10px;
+  padding-bottom: 15px;
 }
 
 .assigned-sub-list.active {
-  display: flex;
+  display: grid;
+  gap: 0px 0px;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 576px) {
+  .assigned-sub-list.active {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .assigned-sub-list.active {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .assigned-sub-list.active {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (-ms-high-contrast: none) {
+  .assigned-sub-list.active {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .assigned-sub-list {
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (-ms-high-contrast: none) {
+  .assigned-sub-list {
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+.assigned-sub-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.assigned-sub-list::-webkit-scrollbar-track {
+  background-color: #2E2E2E;
+  border-radius: 10px;
+}
+
+.assigned-sub-list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #C092FC;
 }
 
 .assigned-sub-image {
-  width: 130px;
-  height: 130px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  padding: 15px;
+  padding: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: .2s ease all;
+  filter: grayscale(30%);
+}
+
+@media screen and (-ms-high-contrast: none) {
+  .assigned-sub-image {
+    width: 130px;
+    height: 130px;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+.assigned-sub-image:hover {
+  transform: scale(1.04);
+  cursor: pointer;
+  filter: none;
 }
 /*# sourceMappingURL=styles.css.map */
