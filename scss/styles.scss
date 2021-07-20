@@ -451,8 +451,7 @@ formgroup {
     // justify-content: space-between;
     width: 100%;
     background-color: $colour-2;
-    padding-top: 10px;
-    padding-bottom: 15px;
+    padding: 15px;
     &.active {
         // display: flex;
         display: grid; 
@@ -505,8 +504,8 @@ formgroup {
     padding: 2px;
     margin-left: auto;
     margin-right: auto;
-    transition: .2s ease all;
-    filter: grayscale(30%);
+    transition: .3s ease all;
+    position: relative;
     @include media-ie {
         width: 130px;
         height: 130px;
@@ -516,7 +515,8 @@ formgroup {
     &:hover {
         transform: scale(1.04);
         cursor: pointer;
-        filter: none;
+        box-shadow: 0 0 8px $black, inset 0px 0px 0px 6px $colour-5;
+        z-index: 999;
     }
 }
 

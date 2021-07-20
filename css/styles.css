@@ -490,8 +490,7 @@ formgroup {
   display: none;
   width: 100%;
   background-color: #2E2E2E;
-  padding-top: 10px;
-  padding-bottom: 15px;
+  padding: 15px;
 }
 
 .assigned-sub-list.active {
@@ -560,8 +559,8 @@ formgroup {
   padding: 2px;
   margin-left: auto;
   margin-right: auto;
-  transition: .2s ease all;
-  filter: grayscale(30%);
+  transition: .3s ease all;
+  position: relative;
 }
 
 @media screen and (-ms-high-contrast: none) {
@@ -576,6 +575,7 @@ formgroup {
 .assigned-sub-image:hover {
   transform: scale(1.04);
   cursor: pointer;
-  filter: none;
+  box-shadow: 0 0 8px #000, inset 0px 0px 0px 6px #C092FC;
+  z-index: 999;
 }
 /*# sourceMappingURL=styles.css.map */
