@@ -307,14 +307,16 @@ h1 {
   width: 100%;
 }
 
-formgroup {
+fieldset {
   position: relative;
   margin-top: 20px;
   width: 100%;
+  border-width: 0;
+  padding: 0;
 }
 
 @media (min-width: 768px) {
-  formgroup {
+  fieldset {
     margin-top: 0;
   }
 }

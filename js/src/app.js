@@ -1,5 +1,7 @@
 let randomImage = `https://picsum.photos/500`;
-const pulledImage = document.getElementById('pulled-image');
+// const pulledImage = document.getElementById('pulled-image');
+const pulledImage = document.createElement('img');
+const imageDiv = document.getElementById('img-div');
 const refresh = document.getElementById('refresh');
 const emailInput = document.getElementById('assign-email');
 const emailLabel = document.getElementById('email-label');
@@ -11,26 +13,36 @@ const topLoader = document.getElementById('top-loader-container');
 let storage = [];
 
 
+console.log(pulledImage);
+
 /*
-    Axios GET request to pull a random image
+    Reusable function for Axios GET request to pull a random image
     from Picsum
 */
-const returnedData = axios.get(randomImage)
+
+function pullImage() {
+    axios.get(randomImage)
     .then(function (response) {
-    // handle success
-    const picsumID =  response.headers['picsum-id'];
-    let currentURL =  `https://picsum.photos/id/${picsumID}/500`;
-    pulledImage.setAttribute(`src`, currentURL);
-    topLoader.classList.add('loading');
-    console.log(response);
+        const picsumID =  response.headers['picsum-id'];
+        let currentURL =  `https://picsum.photos/id/${picsumID}/500`;
+        imageDiv.insertBefore(pulledImage, refresh);
+        pulledImage.setAttribute(`id`, 'pulled-image');
+        pulledImage.setAttribute(`class`, 'assigning-image');
+        pulledImage.setAttribute(`src`, currentURL);
+        pulledImage.setAttribute(`alt`, 'Randomly Pulled Image');
+        topLoader.classList.add('loading');
+        console.log(response);
     })
     .catch(function (error) {
-    // handle error
-    console.log(error);
+        console.log(error);
     })
     .finally(function(response) {
         topLoader.classList.remove('loading');
     });
+}
+
+pullImage();
+
 
 /*
     Shows the loading animation, and then
@@ -40,20 +52,7 @@ const returnedData = axios.get(randomImage)
 */
 refresh.addEventListener('click', function() {
     topLoader.classList.add('loading');
-    axios.get(`${randomImage}`)
-    .then(function (response) {
-        const picsumID =  response.headers['picsum-id'];
-        const currentURL =  `https://picsum.photos/id/${picsumID}/500`;
-        pulledImage.setAttribute(`src`, currentURL);
-        console.log(response);
-        })
-        .catch(function (error) {
-        // handle error
-        console.log(error);
-        })
-        .finally(function(response) {
-            topLoader.classList.remove('loading');
-        });
+    pullImage();
 });
 
 /*
@@ -133,20 +132,7 @@ emailButton.addEventListener('click', function() {
         })();
 
         topLoader.classList.add('loading');
-        axios.get(`${randomImage}`)
-        .then(function (response) {
-            const picsumID =  response.headers['picsum-id'];
-            const currentURL =  `https://picsum.photos/id/${picsumID}/500`;
-            pulledImage.setAttribute(`src`, currentURL);
-            console.log(response);
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .finally(function() {
-            topLoader.classList.remove('loading');
-        });
+        pullImage();
     }
 });
 

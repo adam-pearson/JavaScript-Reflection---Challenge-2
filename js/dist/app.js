@@ -1,7 +1,9 @@
 "use strict";
 
-var randomImage = "https://picsum.photos/500";
-var pulledImage = document.getElementById('pulled-image');
+var randomImage = "https://picsum.photos/500"; // const pulledImage = document.getElementById('pulled-image');
+
+var pulledImage = document.createElement('img');
+var imageDiv = document.getElementById('img-div');
 var refresh = document.getElementById('refresh');
 var emailInput = document.getElementById('assign-email');
 var emailLabel = document.getElementById('email-label');
@@ -11,24 +13,31 @@ var assignedList = document.getElementById('assigned-list');
 var assignedCont = document.getElementById('assigned');
 var topLoader = document.getElementById('top-loader-container');
 var storage = [];
+console.log(pulledImage);
 /*
-    Axios GET request to pull a random image
+    Reusable function for Axios GET request to pull a random image
     from Picsum
 */
 
-var returnedData = axios.get(randomImage).then(function (response) {
-  // handle success
-  var picsumID = response.headers['picsum-id'];
-  var currentURL = "https://picsum.photos/id/".concat(picsumID, "/500");
-  pulledImage.setAttribute("src", currentURL);
-  topLoader.classList.add('loading');
-  console.log(response);
-})["catch"](function (error) {
-  // handle error
-  console.log(error);
-})["finally"](function (response) {
-  topLoader.classList.remove('loading');
-});
+function pullImage() {
+  axios.get(randomImage).then(function (response) {
+    var picsumID = response.headers['picsum-id'];
+    var currentURL = "https://picsum.photos/id/".concat(picsumID, "/500");
+    imageDiv.insertBefore(pulledImage, refresh);
+    pulledImage.setAttribute("id", 'pulled-image');
+    pulledImage.setAttribute("class", 'assigning-image');
+    pulledImage.setAttribute("src", currentURL);
+    pulledImage.setAttribute("alt", 'Randomly Pulled Image');
+    topLoader.classList.add('loading');
+    console.log(response);
+  })["catch"](function (error) {
+    console.log(error);
+  })["finally"](function (response) {
+    topLoader.classList.remove('loading');
+  });
+}
+
+pullImage();
 /*
     Shows the loading animation, and then
     loads a new image image when the refresh
@@ -38,17 +47,7 @@ var returnedData = axios.get(randomImage).then(function (response) {
 
 refresh.addEventListener('click', function () {
   topLoader.classList.add('loading');
-  axios.get("".concat(randomImage)).then(function (response) {
-    var picsumID = response.headers['picsum-id'];
-    var currentURL = "https://picsum.photos/id/".concat(picsumID, "/500");
-    pulledImage.setAttribute("src", currentURL);
-    console.log(response);
-  })["catch"](function (error) {
-    // handle error
-    console.log(error);
-  })["finally"](function (response) {
-    topLoader.classList.remove('loading');
-  });
+  pullImage();
 });
 /*
     Event listener for the assign email button.
@@ -116,16 +115,6 @@ emailButton.addEventListener('click', function () {
     })();
 
     topLoader.classList.add('loading');
-    axios.get("".concat(randomImage)).then(function (response) {
-      var picsumID = response.headers['picsum-id'];
-      var currentURL = "https://picsum.photos/id/".concat(picsumID, "/500");
-      pulledImage.setAttribute("src", currentURL);
-      console.log(response);
-    })["catch"](function (error) {
-      // handle error
-      console.log(error);
-    })["finally"](function () {
-      topLoader.classList.remove('loading');
-    });
+    pullImage();
   }
 });

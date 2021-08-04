@@ -265,10 +265,6 @@ h1 {
   }
 
 
-
-
-
-
 // Input Form
 
 #form {
@@ -278,10 +274,12 @@ h1 {
     width: 100%;
 }
 
-formgroup {
+fieldset {
     position: relative;
     margin-top: 20px;
     width: 100%;
+    border-width: 0;
+    padding: 0;
     @include media-md {
         margin-top: 0;
     }

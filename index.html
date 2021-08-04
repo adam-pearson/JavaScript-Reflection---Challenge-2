@@ -17,14 +17,13 @@
     </div>
     <div id="page-container">
         <div id="image-column">
-            <div class="image-div">
+            <div id="img-div" class="image-div">
                 <div class="loader-container">
                     <div id="loader-inner" class="loader-inner">
                         <div class="loader"></div>
                         <p>Loading Image</p>
                     </div>
                 </div>
-                <img id="pulled-image" class="assigning-image">
                 <div id="refresh" class="refresh-div">
                     <i class="fas fa-sync-alt"></i>
                 </div>
@@ -38,14 +37,16 @@
             <p>Click to load a new image</p>
         </div>
         <div id="email-column">
-            <div id="form">
-                <formgroup>
-                    <input type="email" id="assign-email" name="email">
-                    <label id="email-label">Email</label>
-                    <span id="email-message">Please enter a valid email address.</span>
-                </formgroup>
+            <form id="form">
+                <!-- <form> -->
+                    <fieldset>
+                        <input type="email" id="assign-email" name="email">
+                        <label id="email-label">Email</label>
+                        <span id="email-message">Please enter a valid email address.</span>
+                    </fieldset>
+                <!-- </form> -->
                 <button type="button" id="assign-button"><span>Assign</span></button>
-            </div>
+                </form>
             <div id="assigned">
             </div>
         </div>
